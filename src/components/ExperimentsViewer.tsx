@@ -7,15 +7,42 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ExperimentResults from './ExperimentResults';
-import Fab from '@mui/material/Fab';
-import FileDownloadIcon from '@mui/icons-material/FileDownload';
 
 import { UserExperiments } from '../models/experiment';
+import ExportExperiments from './ExportExperiments';
+import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 const drawerWidth = 240;
 
 export default function ExperimentsViewer(props: {experiments: UserExperiments}) {
   const [selected, setSelected] = useState(0);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = (
+    event: React.SyntheticEvent | Event,
+    reason?: SnackbarCloseReason,
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <React.Fragment>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -34,10 +61,7 @@ export default function ExperimentsViewer(props: {experiments: UserExperiments})
         }}
       >
         <Box sx={{ overflow: 'auto' }}>
-          <Fab variant="extended" color="primary">
-            <FileDownloadIcon sx={{ mr: 1 }} />
-            Export Data
-          </Fab>
+          <ExportExperiments data={props.experiments} snackbarOpen={setOpen}></ExportExperiments>
           <List>
             {props.experiments.documents.map((doc, index) => (
               <ListItem key={doc.id} disablePadding>
@@ -52,6 +76,13 @@ export default function ExperimentsViewer(props: {experiments: UserExperiments})
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <ExperimentResults doc={props.experiments.documents[selected]}></ExperimentResults>
       </Box>
+      <Snackbar
+        open={open}
+        autoHideDuration={5000}
+        onClose={handleClose}
+        message="File download has begun"
+        action={action}
+      />
     </Box>
   );
 }
