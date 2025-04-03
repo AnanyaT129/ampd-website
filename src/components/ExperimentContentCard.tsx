@@ -5,17 +5,35 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { ExperimentData } from '../models/experiment';
+import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
+import Divider from '@mui/material/Divider';
 
-export default function ExperimentContentCard(props: {doc: ExperimentData}) {
-    const safetyLabel = (mpContent: number) => {
-        if (mpContent > 100) {
-            return (<Typography sx={{ color: 'red', mb: 1.5 }}>Unsafe to drink</Typography>);
-        } else if (mpContent > 50) {
-            return (<Typography sx={{ color: 'brown', mb: 1.5 }}>Okay to drink</Typography>);
+const Item = styled(Box)(({ theme }) => ({
+    backgroundColor: '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: (theme).palette.text.secondary,
+    ...theme.applyStyles('dark', {
+        backgroundColor: '#1A2027',
+    }),
+    flexGrow: 1,
+}));
+
+export default function ExperimentContentCard(props: {doc: ExperimentData, col: boolean}) {
+    const safetyLabel = (plasticPresent: string) => {
+        if (plasticPresent === "True") {
+            return (<Typography sx={{ color: 'red', mb: 1.5 }}>Plastic Present</Typography>);
+        } else if (plasticPresent === "False") {
+            return (<Typography sx={{ color: 'green', mb: 1.5 }}>Plastic Not Present</Typography>);
         } else {
-            return (<Typography sx={{ color: 'green', mb: 1.5 }}>Safe to drink</Typography>);
+            return (<Typography sx={{ color: 'brown', mb: 1.5 }}>Uncertain Results</Typography>);
         }
     }
+
+    const df = props.doc.impedanceData.low.length + props.doc.impedanceData.high.length - 2
 
   return (
     <Card>
@@ -23,14 +41,32 @@ export default function ExperimentContentCard(props: {doc: ExperimentData}) {
             <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
                 Microplastic Content
             </Typography>
-            <Typography variant="h5" component="div">
-                {props.doc.microplastic_content}
-            </Typography>
-            {safetyLabel(props.doc.microplastic_content)}
+            <Stack direction={props.col ? 'column' : "row"} divider={<Divider orientation={props.col ? 'horizontal' : "vertical"} flexItem />} useFlexGap>
+                <Item>
+                    <Typography variant="caption" component="div">
+                        "Impedance Analysis Results"
+                    </Typography>
+                    {safetyLabel(props.doc.impedanceAnalysis.analysisResults.plasticPresent)}
+                    <Typography variant="body1" component="div">
+                        Estimated Plastic Content: {props.doc.impedanceAnalysis.analysisResults.estPlasticContent}
+                    </Typography>
+                </Item>
+                <Item>
+                    <Typography variant="caption" component="div">
+                        "Camera Analysis Results"
+                    </Typography>
+                    {safetyLabel(props.doc.cameraAnalysis?.analysisResults?.plasticPresent ?? "")}
+                    <Typography variant="body1" component="div">
+                        Estimated Plastic Content: {props.doc.cameraAnalysis?.analysisResults?.estPlasticContent ?? ""}
+                    </Typography>
+                </Item>
+            </Stack>
         </CardContent>
-        <CardActions>
-            <Button size="small">See More</Button>
-        </CardActions>
+        {!props.col ? (
+            <CardActions>
+                <Button size="small">See More</Button>
+            </CardActions>
+        ) : null}
     </Card>
   );
 }
