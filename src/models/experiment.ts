@@ -52,6 +52,7 @@ export type ExperimentData = {
             averageScatteredLight: number,
             estPlasticContent: number,
             plasticPresent: string
+            imgToSave: string
         }
     }
 }
