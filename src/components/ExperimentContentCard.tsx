@@ -48,7 +48,7 @@ export default function ExperimentContentCard(props: {doc: ExperimentData, col: 
                     </Typography>
                     {safetyLabel(props.doc.impedanceAnalysis.analysisResults.plasticPresent)}
                     <Typography variant="body1" component="div">
-                        Estimated Plastic Content: {props.doc.impedanceAnalysis.analysisResults.estPlasticContent}
+                        Estimated ppm: {props.doc.impedanceAnalysis.analysisResults.ppm}
                     </Typography>
                 </Item>
                 <Item>
@@ -57,7 +57,7 @@ export default function ExperimentContentCard(props: {doc: ExperimentData, col: 
                     </Typography>
                     {safetyLabel(props.doc.cameraAnalysis[0]?.analysisResults?.plasticPresent ?? "")}
                     <Typography variant="body1" component="div">
-                        Estimated Plastic Content: {props.doc.cameraAnalysis[0]?.analysisResults?.estPlasticContent ?? ""}
+                        Average Scattered Light: {props.doc.cameraAnalysis?.[0].analysisResults.averageScatteredLight ?? ""}
                     </Typography>
                 </Item>
             </Stack>

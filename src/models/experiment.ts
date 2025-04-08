@@ -25,9 +25,7 @@ export type ExperimentData = {
             impLow: number[],
             impHigh: number[],
             capacitance: number[],
-            ppmLow: number,
-            ppmHigh: number,
-            estPlasticContent: number,
+            ppm: number,
             plasticPresent: string,
             ttestResults: {
                 low: {
