@@ -21,14 +21,6 @@ export default function Experiments () {
 
     const [experiments, setExperiments] = useState<UserExperiments | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
-    // const experiment1 = data1 as unknown as ExperimentData
-    // const experiment2 = data2 as unknown as ExperimentData
-    // const experiment3 = data3 as unknown as ExperimentData
-    
-    // const experiments: UserExperiments = {
-    //     collection_name: "User 1",
-    //     documents: [experiment3, experiment2, experiment1]
-    // }
 
     useEffect(() => {
         const fetchUserData = async () => {

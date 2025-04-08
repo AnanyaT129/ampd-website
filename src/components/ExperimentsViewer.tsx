@@ -113,6 +113,7 @@ export function ExperimentsViewer(props: {experiments: UserExperiments}) {
         }}
       >
         <Box sx={{ overflow: 'auto' }}>
+          <img src='./images/logo.png' width={0.9 * drawerWidth}></img>
           <ExportExperiments data={props.experiments} snackbarOpen={setOpen}></ExportExperiments>
           <FormGroup>
             <FormControlLabel
