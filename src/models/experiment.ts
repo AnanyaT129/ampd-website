@@ -41,7 +41,7 @@ export type ExperimentData = {
             }
         }
     },
-    cameraAnalysis: {
+    cameraAnalysis: [{
         metadata: {
             fps: number,
             duration: number
@@ -54,5 +54,5 @@ export type ExperimentData = {
             plasticPresent: string
             imgToSave: string
         }
-    }
+    }]
 }

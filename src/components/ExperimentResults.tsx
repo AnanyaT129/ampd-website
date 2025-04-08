@@ -32,9 +32,9 @@ export default function ExperimentResults(props: {doc: ExperimentData, col: bool
 
     // Fetch the image from Firebase Storage using the path in imgToSave
     useEffect(() => {
-        if (props.doc.cameraAnalysis?.analysisResults?.imgToSave !== null && props.doc.cameraAnalysis?.analysisResults?.imgToSave !== undefined && props.doc.cameraAnalysis.analysisResults.imgToSave !== "None") {
+        if (props.doc.cameraAnalysis[0]?.analysisResults?.imgToSave !== null && props.doc.cameraAnalysis[0]?.analysisResults?.imgToSave !== undefined && props.doc.cameraAnalysis[0].analysisResults.imgToSave !== "None") {
             const storage = getStorage();
-            const imageRef = ref(storage, props.doc.cameraAnalysis.analysisResults.imgToSave);
+            const imageRef = ref(storage, props.doc.cameraAnalysis[0].analysisResults.imgToSave);
 
             // Fetch the image URL
             getDownloadURL(imageRef)
@@ -47,7 +47,7 @@ export default function ExperimentResults(props: {doc: ExperimentData, col: bool
         } else {
             setImageUrl("No Image")
         }
-    }, [props.doc.cameraAnalysis.analysisResults.imgToSave]); // Only re-fetch if imgToSave changes
+    }, [props.doc.cameraAnalysis[0].analysisResults.imgToSave]); // Only re-fetch if imgToSave changes
 
     return (
         <div>

@@ -55,9 +55,9 @@ export default function ExperimentContentCard(props: {doc: ExperimentData, col: 
                     <Typography variant="caption" component="div">
                         "Camera Analysis Results"
                     </Typography>
-                    {safetyLabel(props.doc.cameraAnalysis?.analysisResults?.plasticPresent ?? "")}
+                    {safetyLabel(props.doc.cameraAnalysis[0]?.analysisResults?.plasticPresent ?? "")}
                     <Typography variant="body1" component="div">
-                        Estimated Plastic Content: {props.doc.cameraAnalysis?.analysisResults?.estPlasticContent ?? ""}
+                        Estimated Plastic Content: {props.doc.cameraAnalysis[0]?.analysisResults?.estPlasticContent ?? ""}
                     </Typography>
                 </Item>
             </Stack>
