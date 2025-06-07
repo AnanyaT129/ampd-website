@@ -25,8 +25,8 @@ export default function About() {
         color: theme.palette.text.secondary,
         ...theme.applyStyles('dark', {
           backgroundColor: '#1A2027',
-        maxWidth: "50%",
         }),
+        maxWidth: "50%",
       }));
 
     return (
@@ -36,7 +36,7 @@ export default function About() {
             sx={{ justifyContent: "space-evenly" }}
         >
             <Item>
-                <img src="./images/electronics.png"></img>
+                <img src="./images/ampdDevice.png"></img>
             </Item>
             <Item>
                 <Card sx={{ minWidth: 275 }}>
@@ -44,6 +44,7 @@ export default function About() {
                         <Typography variant="h6" component="div">
                             About the Project
                         </Typography>
+                        <Typography variant='body1'>Northeastern University ECE Capstone Project, Spring 2025 <br></br> <br></br></Typography>
                         <Typography variant='body1'>Public health is at risk from increased microplastic content in drinking water, which so far can only be reliably measured through expensive professional laboratory testing. The Automated MicroPlastic Detector (AMP’D) team has developed a system for rapid detection of microplastics in water. The system provides both a visual and quantitative analysis, allowing users to assess the quality of their water at home, and compare microplastic concentrations in household, tap, and bottled water against safety standards.  AMP’D proves that it is possible to create a low-cost, intuitive, and accessible system to test for microplastics.</Typography>
                         <Typography variant="body1" color="inherit" noWrap>
                             &nbsp;

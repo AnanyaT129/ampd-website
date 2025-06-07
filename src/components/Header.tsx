@@ -25,7 +25,7 @@ export default function Header(props: {enableLogin: boolean}) {
         (<Button color="inherit" onClick={logout}>
             Logout
         </Button>) :
-        (<Button color="inherit" onClick={login}>
+        (<Button color="inherit" onClick={login} disabled>
             Login
         </Button>)
     
